@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Task\Scheduler\TaskSchedulerInterface;
 use Task\Storage\TaskExecutionRepositoryInterface;
 use Task\TaskBundle\Builder\TaskBuilder;
+use Task\TaskBundle\Entity\SystemTaskRepositoryInterface;
 use Task\TaskBundle\Entity\TaskRepository;
 use Task\TaskInterface;
 use Task\TaskStatus;
@@ -29,7 +30,7 @@ class ScheduleSystemTasksCommand extends Command
     private $scheduler;
 
     /**
-     * @var TaskRepository
+     * @var SystemTaskRepositoryInterface
      */
     private $taskRepository;
 
@@ -42,14 +43,14 @@ class ScheduleSystemTasksCommand extends Command
      * @param string $name
      * @param array $systemTasks
      * @param TaskSchedulerInterface $scheduler
-     * @param TaskRepository $taskRepository
+     * @param SystemTaskRepositoryInterface $taskRepository
      * @param TaskExecutionRepositoryInterface $taskExecutionRepository
      */
     public function __construct(
         $name,
         array $systemTasks,
         TaskSchedulerInterface $scheduler,
-        TaskRepository $taskRepository,
+        SystemTaskRepositoryInterface $taskRepository,
         TaskExecutionRepositoryInterface $taskExecutionRepository
     ) {
         parent::__construct($name);

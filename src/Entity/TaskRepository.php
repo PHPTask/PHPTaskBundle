@@ -11,15 +11,17 @@
 
 namespace Task\TaskBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
-use Task\Storage\TaskRepositoryInterface;
 use Task\TaskInterface;
 
 /**
- * Repository for task.
+ * Repository for tasks
+ *
+ * @extends EntityRepository<TaskInterface>
  */
-class TaskRepository extends EntityRepository implements TaskRepositoryInterface
+class TaskRepository extends EntityRepository implements SystemTaskRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -62,7 +64,7 @@ class TaskRepository extends EntityRepository implements TaskRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findAll($page = 1, $pageSize = null)
+    public function findAll($page = 1, $pageSize = null): array
     {
         $query = $this->createQueryBuilder('t')
             ->getQuery();
@@ -100,11 +102,7 @@ class TaskRepository extends EntityRepository implements TaskRepositoryInterface
     }
 
     /**
-     * Returns task identified by system-key.
-     *
-     * @param string $systemKey
-     *
-     * @return TaskInterface
+     * {@inheritdoc}
      */
     public function findBySystemKey($systemKey)
     {
@@ -120,9 +118,7 @@ class TaskRepository extends EntityRepository implements TaskRepositoryInterface
     }
 
     /**
-     * Returns all system-task.
-     *
-     * @return TaskInterface[]
+     * {@inheritdoc}
      */
     public function findSystemTasks()
     {

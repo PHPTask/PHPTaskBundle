@@ -13,8 +13,8 @@ use Task\Scheduler\TaskSchedulerInterface;
 use Task\Storage\TaskExecutionRepositoryInterface;
 use Task\TaskBundle\Builder\TaskBuilder;
 use Task\TaskBundle\Command\ScheduleSystemTasksCommand;
+use Task\TaskBundle\Entity\SystemTaskRepositoryInterface;
 use Task\TaskBundle\Entity\Task;
-use Task\TaskBundle\Entity\TaskRepository;
 use Task\TaskBundle\Tests\Functional\TestHandler;
 use Task\TaskStatus;
 
@@ -28,7 +28,7 @@ class ScheduleSystemTasksCommandTest extends TestCase
     private $scheduler;
 
     /**
-     * @var TaskRepository
+     * @var SystemTaskRepositoryInterface
      */
     private $taskRepository;
 
@@ -40,7 +40,7 @@ class ScheduleSystemTasksCommandTest extends TestCase
     protected function setUp(): void
     {
         $this->scheduler = $this->prophesize(TaskSchedulerInterface::class);
-        $this->taskRepository = $this->prophesize(TaskRepository::class);
+        $this->taskRepository = $this->prophesize(SystemTaskRepositoryInterface::class);
         $this->taskExecutionRepository = $this->prophesize(TaskExecutionRepositoryInterface::class);
     }
 
